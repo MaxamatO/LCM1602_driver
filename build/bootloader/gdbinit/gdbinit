@@ -1,0 +1,2 @@
+source /home/maks/esp-idf/projects/blink-led/build/bootloader/gdbinit/symbols
+source /home/maks/esp-idf/projects/blink-led/build/bootloader/gdbinit/connect

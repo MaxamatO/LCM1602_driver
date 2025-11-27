@@ -1,0 +1,1 @@
+cmd='/usr/bin/cmake;-DSDKCONFIG=/home/maks/esp-idf/projects/blink-led/sdkconfig;-DIDF_PATH=/home/maks/esp-idf;-DIDF_TARGET=esp32;-DPYTHON_DEPS_CHECKED=1;-DPYTHON=python;-DEXTRA_COMPONENT_DIRS=/home/maks/esp-idf/components/bootloader;-DPROJECT_SOURCE_DIR=/home/maks/esp-idf/projects/blink-led;-DIGNORE_EXTRA_COMPONENT=;-GUnix Makefiles;-S;<SOURCE_DIR><SOURCE_SUBDIR>;-B;<BINARY_DIR>'
