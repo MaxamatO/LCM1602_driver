@@ -50,4 +50,13 @@ void app_main(void)
 	lcd1602_init(&lcd);
 	ESP_LOGI(TAG, "LCD Initialized");
 	write_string(&lcd, "Dzien dobry");
+	vTaskDelay(pdMS_TO_TICKS(5000));
+	write_string(&lcd, "Dzien dobryDzien dobryDzien dobryDzien dobryDzien dobryDzien dobryDzien dobryDzien dobry");
+	// while(1){
+	// 	displayShiftLeft(&lcd);
+	// 	vTaskDelay(pdMS_TO_TICKS(1000));
+	// 	displayShiftRight(&lcd);
+	// 	vTaskDelay(pdMS_TO_TICKS(1000));
+	// }
+
 }
