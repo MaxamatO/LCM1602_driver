@@ -11,7 +11,7 @@
 #define WRITE_MODE      0x00    // RW = 0
 #define READ_MODE       0x02    // RW = 1
 
-#define BACKLIGHT_ON    0x08
+#define BACKLIGHT_ON    0x08    // xxxx 1100 | COMM
 #define BACKLIGHT_OFF   0x00
 
 // Commands for function use
@@ -21,8 +21,13 @@
 #define RETURN_HOME     0x02
 #define CURSOR_ON       0x0B // 00001011
 #define CURSOR_OFF      0x09
-#define ENTRY_MODE_SET  0x06
+//#define ENTRY_MODE_SET  0x06
+#define ENTRY_MODE_SET  0x07
 #define DISPLAY_CRUSOR  0x0E
+#define SHIFT_DISPLAY_R 0x1C
+#define SHIFT_DISPLAY_L 0x18
+#define SHIFT_CURSOR_R  0x14
+#define SHIFT_CURSOR_L  0x10
 
 static void lcd1602_write_byte(lcd1602_t *lcd, uint8_t data, uint8_t mode);
 static void lcd1602_write_nibble(lcd1602_t *lcd, uint8_t nibble);
@@ -48,7 +53,7 @@ void lcd1602_init(lcd1602_t *lcd){
     clearDisplay(lcd);
     returnHome(lcd);
 	lcd1602_write_command(lcd, 0x0C);		// return home
-    lcd->bl = BACKLIGHT_ON; // Disable backlight during init to not messup init sequence
+    lcd->bl = BACKLIGHT_ON; // Enable backlight after init
 }
 
 void clearDisplay(lcd1602_t *lcd){
@@ -92,9 +97,16 @@ void write_string(lcd1602_t *lcd, const char *str){
     }
 }
 
+void displayShiftLeft(lcd1602_t *lcd){
+    lcd1602_write_command(lcd, SHIFT_DISPLAY_L);        
+}
+
+void displayShiftRight(lcd1602_t *lcd){
+    lcd1602_write_command(lcd, SHIFT_DISPLAY_R);        
+}
 
 static void lcd1602_write_byte(lcd1602_t *lcd, uint8_t data, uint8_t mode){
-    uint8_t h_nibble = (data & 0xF0) | mode;
+    uint8_t h_nibble = (data & 0xF0) | mode; // 
 	uint8_t l_nibble = ((data << 4) & 0xF0) | mode;
 	lcd1602_write_nibble(lcd, h_nibble);
 	lcd1602_write_nibble(lcd, l_nibble);
